@@ -1,5 +1,5 @@
 class AirController < ApplicationController
-  def twins
+def twins
     @horoscope = "Many of your personal goals have either been met or are in progress, Gemini, and you're feeling exhilarated. However, people around you might have their hands out. You may be asked to contribute to charities or make personal loans to people you don't know well. You want to help whenever you can, but be discriminating about whom you help now. Some may be less than trustworthy."
 
     @array_of_numbers = Array.new
@@ -41,4 +41,22 @@ class AirController < ApplicationController
 
     render({ :template => "wind_templates/aquarius.html.erb" })
   end
+
+  def horoscopes 
+  
+    @the_sign= params.fetch("the_sign")
+    @cat=Zodiac.list.fetch(@the_sign.to_sym).fetch(:horoscope)
+  
+    @array_of_numbers = Array.new
+  
+    5.times do
+      another_number = rand(1...100)
+      
+      @array_of_numbers.push(another_number)
+    end
+
+    render({ :template => "wind_templates/new.html.erb" })
+  end
+
+
 end
